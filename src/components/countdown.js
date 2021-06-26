@@ -6,32 +6,38 @@ import { primaryColors } from '../utils/colors';
 const minutesToMilliseconds = min => min * 1000 * 60;
 const formatTime = time => (time < 10 ? `0${time}` : time);
 
-export const Countdown = ({ minutes = 20, isPaused }) => {
+export const Countdown = ({ minutes = 20, isPaused, onProgress, onEnd }) => {
   const interval = React.useRef(null);
+
+  const [milliseconds, setMilliseconds] = useState(
+    minutesToMilliseconds(minutes)
+  );
 
   const countDown = () => {
     setMilliseconds(time => {
       if (time === 0) {
-        // do more here
+        clearInterval(interval.current);
+        onEnd();
         return time;
       }
       const timeLeft = time - 1000;
-      //   report progress
+      onProgress(timeLeft / minutesToMilliseconds(minutes));
       return timeLeft;
     });
   };
 
   useEffect(() => {
+    setMilliseconds(minutesToMilliseconds(minutes));
+  }, [minutes]);
+
+  useEffect(() => {
     if (isPaused) {
+      if (interval.current) clearInterval(interval.current);
       return;
     }
     interval.current = setInterval(countDown, 1000);
     return () => clearInterval(interval.current);
   }, [isPaused]);
-
-  const [milliseconds, setMilliseconds] = useState(
-    minutesToMilliseconds(minutes)
-  );
 
   const minute = Math.floor(milliseconds / 1000 / 60) % 60;
   const seconds = Math.floor(milliseconds / 1000) % 60;
