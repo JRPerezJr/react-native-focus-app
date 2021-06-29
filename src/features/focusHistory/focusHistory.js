@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, StyleSheet, FlatList, Text, SafeAreaView } from 'react-native';
-import { Card, Title, Paragraph } from 'react-native-paper';
 
 import { fontSizes, spacing } from '../../utils/sizes';
 import { RoundedButton } from '../../components/roundedButton';
