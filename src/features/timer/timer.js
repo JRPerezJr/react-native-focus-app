@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, Vibration, Platform } from 'react-native';
-import { ProgressBar } from 'react-native-paper';
+import { ProgressBar, Colors } from 'react-native-paper';
 import { useKeepAwake } from 'expo-keep-awake';
 
 import { primaryColors } from '../../utils/colors';
@@ -60,7 +60,11 @@ export const Timer = ({ focusSubject, onTimerEnd, clearSubject }) => {
         <Text style={styles.title}>Focusing on:</Text>
         <Text style={styles.task}>{focusSubject}</Text>
         <View style={styles.progressContainer}>
-          <ProgressBar progress={progress} style={styles.progressBar} />
+          <ProgressBar
+            progress={progress}
+            color={Colors.white}
+            style={styles.progressBar}
+          />
         </View>
       </View>
       <View style={styles.buttonWrapper}>
@@ -110,7 +114,6 @@ const styles = StyleSheet.create({
     paddingTop: spacing.sm,
   },
   progressBar: {
-    color: primaryColors.black,
     height: 10,
   },
   clearSubject: {
