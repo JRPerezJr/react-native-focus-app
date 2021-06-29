@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, FlatList, Text, SafeAreaView } from 'react-native';
+import { Card, Title, Paragraph } from 'react-native-paper';
 
 import { fontSizes, spacing } from '../../utils/sizes';
 import { RoundedButton } from '../../components/roundedButton';
@@ -25,6 +26,7 @@ export const FocusHistory = ({ focusHistory, onClear }) => {
               data={focusHistory}
               renderItem={HistoryItem}
             />
+
             <View style={styles.clearContainer}>
               <RoundedButton
                 size={75}
@@ -41,7 +43,7 @@ export const FocusHistory = ({ focusHistory, onClear }) => {
 
 const styles = StyleSheet.create({
   historyItem: status => ({
-    color: status > 1 ? 'red' : 'green',
+    color: status > 1 ? 'red' : 'lawngreen',
     fontSize: fontSizes.md,
   }),
   title: {
